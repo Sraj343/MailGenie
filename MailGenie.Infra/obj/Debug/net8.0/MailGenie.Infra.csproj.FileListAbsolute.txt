@@ -13,3 +13,4 @@ C:\Users\jadha\Desktop\stockConsole\MailGenie\MailGenie.Infra\obj\Debug\net8.0\M
 C:\Users\jadha\Desktop\stockConsole\MailGenie\MailGenie.Infra\obj\Debug\net8.0\refint\MailGenie.Infra.dll
 C:\Users\jadha\Desktop\stockConsole\MailGenie\MailGenie.Infra\obj\Debug\net8.0\MailGenie.Infra.pdb
 C:\Users\jadha\Desktop\stockConsole\MailGenie\MailGenie.Infra\obj\Debug\net8.0\ref\MailGenie.Infra.dll
+C:\Users\jadha\Desktop\stockConsole\MailGenie\MailGenie.Infra\obj\Debug\net8.0\MailGenie.Infra.sourcelink.json

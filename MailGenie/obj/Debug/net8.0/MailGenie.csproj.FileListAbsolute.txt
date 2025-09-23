@@ -100,3 +100,4 @@ C:\Users\jadha\Desktop\stockConsole\MailGenie\MailGenie\obj\Debug\net8.0\refint\
 C:\Users\jadha\Desktop\stockConsole\MailGenie\MailGenie\obj\Debug\net8.0\MailGenie.pdb
 C:\Users\jadha\Desktop\stockConsole\MailGenie\MailGenie\obj\Debug\net8.0\MailGenie.genruntimeconfig.cache
 C:\Users\jadha\Desktop\stockConsole\MailGenie\MailGenie\obj\Debug\net8.0\ref\MailGenie.dll
+C:\Users\jadha\Desktop\stockConsole\MailGenie\MailGenie\obj\Debug\net8.0\MailGenie.sourcelink.json
