@@ -1,0 +1,34 @@
+[
+  {
+    "ContainingType": "MailGenie.Controllers.MailController",
+    "Method": "AddEmailTemplate",
+    "RelativePath": "api/Mail/AddTemplate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "template",
+        "Type": "MailGenie.Domain.Model.Mail.EmailTemplate",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MailGenie.Controllers.MailController",
+    "Method": "SendMail",
+    "RelativePath": "api/Mail/sendMail",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "fromFile",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

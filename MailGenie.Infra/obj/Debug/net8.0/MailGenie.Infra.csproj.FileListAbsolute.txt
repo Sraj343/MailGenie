@@ -1,0 +1,15 @@
+C:\Users\jadha\Desktop\stockConsole\MailGenie\MailGenie.Infra\obj\Debug\net8.0\MailGenie.Infra.csproj.AssemblyReference.cache
+C:\Users\jadha\Desktop\stockConsole\MailGenie\MailGenie.Infra\obj\Debug\net8.0\MailGenie.Infra.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jadha\Desktop\stockConsole\MailGenie\MailGenie.Infra\obj\Debug\net8.0\MailGenie.Infra.AssemblyInfoInputs.cache
+C:\Users\jadha\Desktop\stockConsole\MailGenie\MailGenie.Infra\obj\Debug\net8.0\MailGenie.Infra.AssemblyInfo.cs
+C:\Users\jadha\Desktop\stockConsole\MailGenie\MailGenie.Infra\obj\Debug\net8.0\MailGenie.Infra.csproj.CoreCompileInputs.cache
+C:\Users\jadha\Desktop\stockConsole\MailGenie\MailGenie.Infra\bin\Debug\net8.0\MailGenie.Infra.deps.json
+C:\Users\jadha\Desktop\stockConsole\MailGenie\MailGenie.Infra\bin\Debug\net8.0\MailGenie.Infra.dll
+C:\Users\jadha\Desktop\stockConsole\MailGenie\MailGenie.Infra\bin\Debug\net8.0\MailGenie.Infra.pdb
+C:\Users\jadha\Desktop\stockConsole\MailGenie\MailGenie.Infra\bin\Debug\net8.0\MailGenie.Domain.dll
+C:\Users\jadha\Desktop\stockConsole\MailGenie\MailGenie.Infra\bin\Debug\net8.0\MailGenie.Domain.pdb
+C:\Users\jadha\Desktop\stockConsole\MailGenie\MailGenie.Infra\obj\Debug\net8.0\MailGeni.0710E696.Up2Date
+C:\Users\jadha\Desktop\stockConsole\MailGenie\MailGenie.Infra\obj\Debug\net8.0\MailGenie.Infra.dll
+C:\Users\jadha\Desktop\stockConsole\MailGenie\MailGenie.Infra\obj\Debug\net8.0\refint\MailGenie.Infra.dll
+C:\Users\jadha\Desktop\stockConsole\MailGenie\MailGenie.Infra\obj\Debug\net8.0\MailGenie.Infra.pdb
+C:\Users\jadha\Desktop\stockConsole\MailGenie\MailGenie.Infra\obj\Debug\net8.0\ref\MailGenie.Infra.dll

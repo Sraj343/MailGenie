@@ -1,0 +1,6 @@
+@MailGenie_HostAddress = http://localhost:5119
+
+GET {{MailGenie_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
