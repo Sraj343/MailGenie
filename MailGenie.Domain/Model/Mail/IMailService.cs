@@ -10,6 +10,5 @@ namespace MailGenie.Domain.Model.Mail
     public interface IMailService
     {
         Task<MailResult> SendMail(string excelFilePath);
-        Task<bool> AddEmailTemplate(EmailTemplate emailTemplate);
     }
 }

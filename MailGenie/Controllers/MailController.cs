@@ -57,24 +57,5 @@ namespace MailGenie.Controllers
             }
         }
 
-        [HttpPost("AddTemplate")]
-        public async Task<IActionResult> AddEmailTemplate([FromBody] EmailTemplate template)
-        {
-            if (template == null)
-                return BadRequest("Template cannot be null.");
-
-            try
-            {
-                var result = await _mailService.AddEmailTemplate(template); // Pass the template
-                if (result)
-                    return Ok(new { message = "Template added successfully." });
-                else
-                    return BadRequest("Failed to add template.");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
-            }
-        }
     }
 }

@@ -75,7 +75,6 @@ namespace MailGenie.Infra
 
                     }
                 }
-
             }
             catch (Exception ex)
             {
@@ -90,12 +89,10 @@ namespace MailGenie.Infra
             var mailResult = new MailResult();
             try
             {
-
                 var templateList = await GetTemplateContent();
 
                 foreach (var item in result)
                 {
-
                     mailResult.Total++;
 
                     // Skip if no email
@@ -140,7 +137,7 @@ namespace MailGenie.Infra
                             .Replace("#CompanyName", item.CompanyName)
                             .Replace("#Position", item.PositionName);
 
-                        await SendMailAysncMethod(emailSubject, emailBody, item.Email, item.ResumeLink,item.ApplierName);
+                        await SendMailAysncMethod(emailSubject, emailBody, item.Email, item.ResumeLink, item.ApplierName);
                         mailResult.Success++;
                     }
                     catch (Exception ex)
@@ -159,7 +156,7 @@ namespace MailGenie.Infra
             }
         }
 
-        public async Task SendMailAysncMethod(string subject, string body, string toEmail,string googleDriveFileUrl, string ApplicantName)
+        public async Task SendMailAysncMethod(string subject, string body, string toEmail, string googleDriveFileUrl, string ApplicantName)
         {
             try
             {
@@ -172,17 +169,18 @@ namespace MailGenie.Infra
                     message.IsBodyHtml = true;
 
                     // Download file from Google Drive
-                    if (!string.IsNullOrWhiteSpace(googleDriveFileUrl)) 
-                    { 
-                    using (var httpClient = new HttpClient())
+                    if (!string.IsNullOrWhiteSpace(googleDriveFileUrl))
                     {
-                        // Modify the link to download directly if it's a shareable link
-                        var fileBytes = await httpClient.GetByteArrayAsync(googleDriveFileUrl);
+                        using (var httpClient = new HttpClient())
+                        {
+                            // Modify the link to download directly if it's a shareable link
+                            var fileBytes = await httpClient.GetByteArrayAsync(googleDriveFileUrl);
 
-                        // Create an attachment from byte array
-                        var attachment = new Attachment(new MemoryStream(fileBytes), $"{ApplicantName}_Resume.pdf"); // Change filename if needed
-                        message.Attachments.Add(attachment);
-                    }
+                            // Create an attachment from byte array
+                            var attachment = new Attachment(new MemoryStream(fileBytes), $"{ApplicantName}_Resume.pdf");
+
+                            message.Attachments.Add(attachment);
+                        }
                     }
 
                     using (var smtp = new SmtpClient(_smtpSetting.Host, _smtpSetting.Port))
@@ -210,30 +208,5 @@ namespace MailGenie.Infra
             return result;
         }
 
-        public async Task<bool> AddEmailTemplate(EmailTemplate emailTemplate)
-        {
-            try
-            {
-
-                var mailTemplate = new EmailTemplate
-                {
-                    TemplateContent = emailTemplate.TemplateContent,
-                    TemplateType = "Interview",
-                    SubjectContent = emailTemplate.SubjectContent,
-                    Position = emailTemplate.Position,
-                    CreateDate = DateTime.UtcNow,
-                    IsActive = true
-
-                };
-
-                _dbContext.Mailtemplates.Add(mailTemplate);
-                _dbContext.SaveChanges();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-        }
     }
 }
