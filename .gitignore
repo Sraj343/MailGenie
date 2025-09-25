@@ -48,5 +48,5 @@ Thumbs.db
 # Ignore all appsettings and token files recursively
 **/appsettings.json
 **/appsettings.*.json
-**/token.json/
+**/token.json
 
