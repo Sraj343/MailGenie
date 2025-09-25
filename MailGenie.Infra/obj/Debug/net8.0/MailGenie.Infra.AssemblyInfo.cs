@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MailGenie.Infra")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+450c80f562cf4e6138eb2e386d9a497cdca644e7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4efcb6cef9c563bd52f78ea11b83958ca665f5c3")]
 [assembly: System.Reflection.AssemblyProductAttribute("MailGenie.Infra")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MailGenie.Infra")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

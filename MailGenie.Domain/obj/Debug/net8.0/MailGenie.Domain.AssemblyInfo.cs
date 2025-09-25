@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MailGenie.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1c6f329163687abe1f5f09e37ee4fd4f01e671c5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4efcb6cef9c563bd52f78ea11b83958ca665f5c3")]
 [assembly: System.Reflection.AssemblyProductAttribute("MailGenie.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MailGenie.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

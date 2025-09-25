@@ -1,8 +1,8 @@
 [
   {
-    "ContainingType": "MailGenie.Controllers.MailController",
+    "ContainingType": "MailGenie.Controllers.EmailTemplateController",
     "Method": "AddEmailTemplate",
-    "RelativePath": "api/Mail/AddTemplate",
+    "RelativePath": "api/EmailTemplate/AddTemplate",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -13,6 +13,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MailGenie.Controllers.EmailTemplateController",
+    "Method": "GetTemplate",
+    "RelativePath": "api/EmailTemplate/GetTemplate",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {

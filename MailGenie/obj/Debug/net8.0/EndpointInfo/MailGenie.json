@@ -5,6 +5,49 @@
     "version": "1.0"
   },
   "paths": {
+    "/api/EmailTemplate/AddTemplate": {
+      "post": {
+        "tags": [
+          "EmailTemplate"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailTemplate"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailTemplate"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailTemplate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/EmailTemplate/GetTemplate": {
+      "get": {
+        "tags": [
+          "EmailTemplate"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Mail/sendMail": {
       "post": {
         "tags": [
@@ -26,37 +69,6 @@
                 "fromFile": {
                   "style": "form"
                 }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Mail/AddTemplate": {
-      "post": {
-        "tags": [
-          "Mail"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/EmailTemplate"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/EmailTemplate"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/EmailTemplate"
               }
             }
           }

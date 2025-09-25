@@ -28,11 +28,11 @@ namespace MailGenie.Infra
         }
 
 
-        public async Task<MailResult> SendMail(string excelFilePath)
+        public async Task<MailResult> SendMail(string excelFilePath, int templateId)
         {
             var data = await ReadExcelData(excelFilePath);
 
-            var result = await GenerateMail(data);
+            var result = await GenerateMail(data, templateId);
 
             return result;
         }
@@ -84,67 +84,87 @@ namespace MailGenie.Infra
             return result;
         }
 
-        public async Task<MailResult> GenerateMail(List<ApplicantDetailModel> result)
+        public async Task<MailResult> GenerateMail(List<ApplicantDetailModel> applicants, int templateId)
         {
             var mailResult = new MailResult();
+            EmailTemplate emailTemplate = null;
+            List<EmailTemplate> templateList = new List<EmailTemplate>();
+
             try
             {
-                var templateList = await GetTemplateContent();
+                // Load template(s)
+                if (templateId != 0)
+                {
+                    emailTemplate = await GetTemplateContent(templateId);
+                }
+                else
+                {
+                    templateList = await GetTemplateContent();
+                }
 
-                foreach (var item in result)
+                foreach (var applicant in applicants)
                 {
                     mailResult.Total++;
 
-                    // Skip if no email
-                    if (string.IsNullOrWhiteSpace(item.Email))
+                    // Check if email is provided
+                    if (string.IsNullOrWhiteSpace(applicant.Email))
                     {
                         mailResult.Failed++;
-                        mailResult.Errors.Add($"No email provided for position {item.PositionName}");
+                        mailResult.Errors.Add($"No email provided for position {applicant.PositionName}");
                         continue;
                     }
 
-                    // Fetch template & subject
-                    string templateContent = templateList
-                        .Where(t => t.Position == item.PositionName)
-                        .Select(x => x.TemplateContent)
-                        .FirstOrDefault() ?? "";
+                    string templateContent = string.Empty;
+                    string subject = string.Empty;
 
-                    if (string.IsNullOrEmpty(templateContent))
+                    // Select template content and subject
+                    if (emailTemplate != null)
                     {
-                        mailResult.Failed++;
-                        mailResult.Errors.Add($"No template found for position {item.PositionName}");
-                        continue;
+                        templateContent = emailTemplate.TemplateContent ?? "";
+                        subject = emailTemplate.SubjectContent ?? "";
                     }
+                    else
+                    {
+                        var matchedTemplate = templateList.FirstOrDefault(t => t.Position == applicant.PositionName);
+                        if (matchedTemplate == null)
+                        {
+                            mailResult.Failed++;
+                            mailResult.Errors.Add($"No template found for position {applicant.PositionName}");
+                            continue;
+                        }
 
-
-                    string subject = templateList
-                        .Where(t => t.Position == item.PositionName)
-                        .Select(x => x.SubjectContent)
-                        .FirstOrDefault() ?? "";
+                        templateContent = matchedTemplate.TemplateContent ?? "";
+                        subject = matchedTemplate.SubjectContent ?? "";
+                    }
 
                     if (string.IsNullOrEmpty(templateContent) || string.IsNullOrEmpty(subject))
-                        continue; // Skip if no template found
+                    {
+                        mailResult.Failed++;
+                        mailResult.Errors.Add($"Template or subject is empty for position {applicant.PositionName}");
+                        continue;
+                    }
 
                     try
                     {
-
                         // Replace placeholders
                         string emailBody = templateContent
-                            .Replace("#CompanyName", item.CompanyName)
-                            .Replace("#Position", item.PositionName);
+                            .Replace("#CompanyName", applicant.CompanyName)
+                            .Replace("#Position", applicant.PositionName)
+                            .Replace("#ApplierName", applicant.ApplierName ?? "")
+                            .Replace("#ResumeLink", applicant.ResumeLink ?? "");
 
                         string emailSubject = subject
-                            .Replace("#CompanyName", item.CompanyName)
-                            .Replace("#Position", item.PositionName);
+                            .Replace("#CompanyName", applicant.CompanyName)
+                            .Replace("#Position", applicant.PositionName);
 
-                        await SendMailAysncMethod(emailSubject, emailBody, item.Email, item.ResumeLink, item.ApplierName);
+                        // Send email
+                        await SendMailAysncMethod(emailSubject, emailBody, applicant.Email, applicant.ResumeLink, applicant.ApplierName);
                         mailResult.Success++;
                     }
                     catch (Exception ex)
                     {
                         mailResult.Failed++;
-                        mailResult.Errors.Add($"Failed to send email to {item.Email}: {ex.Message}");
-                        continue;
+                        mailResult.Errors.Add($"Failed to send email to {applicant.Email}: {ex.Message}");
                     }
                 }
 
@@ -152,9 +172,13 @@ namespace MailGenie.Infra
             }
             catch (Exception ex)
             {
-                throw; // or return ex.Message if you want
+                // General failure
+                mailResult.Failed += applicants.Count - mailResult.Total;
+                mailResult.Errors.Add($"General failure: {ex.Message}");
+                return mailResult;
             }
         }
+
 
         public async Task SendMailAysncMethod(string subject, string body, string toEmail, string googleDriveFileUrl, string ApplicantName)
         {
@@ -199,6 +223,14 @@ namespace MailGenie.Infra
             }
         }
 
+        public async Task<EmailTemplate> GetTemplateContent(int templateId)
+        {
+            var result = await _dbContext.Mailtemplates
+                                         .AsNoTracking()
+                                         .FirstOrDefaultAsync(x => x.TemplateId == templateId);
+
+            return result;
+        }
         public async Task<List<EmailTemplate>> GetTemplateContent()
         {
             var result = await _dbContext.Mailtemplates

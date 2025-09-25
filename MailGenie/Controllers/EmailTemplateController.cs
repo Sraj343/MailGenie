@@ -37,6 +37,7 @@ namespace MailGenie.Controllers
             }
         }
 
+
         [HttpGet("GetTemplate")]
         public async Task<IActionResult> GetTemplate()
         {
@@ -44,15 +45,22 @@ namespace MailGenie.Controllers
             {
                 var result = await _mailService.GetTemplateContent();
 
-                if(result == null || !result.Any())
-                    return NotFound("No templates found.");
+                if (result == null || !result.Any())
+                    return NotFound(new { Status = "Error", Message = "No templates found." });
 
-                return Ok(result);
+                var response = new
+                {
+                    Status = "Success",
+                    Data = result
+                };
+
+                return Ok(response);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
+                return StatusCode(500, new { Status = "Error", Message = $"Internal server error: {ex.Message}" });
             }
         }
+
     }
 }

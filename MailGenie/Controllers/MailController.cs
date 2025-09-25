@@ -18,10 +18,10 @@ namespace MailGenie.Controllers
 
 
         [HttpPost("sendMail")]
-        public async Task<IActionResult> SendMail(IFormFile fromFile)
+        public async Task<IActionResult> SendMail(IFormFile fromFile, int templateId)
         {
             if (fromFile == null || fromFile.Length == 0)
-                return BadRequest("No file uploaded.");
+                return BadRequest(new { status = "Failed", message = "No file uploaded." });
 
             try
             {
@@ -37,12 +37,22 @@ namespace MailGenie.Controllers
                     await fromFile.CopyToAsync(stream);
                 }
 
-                var mailResult = await _mailService.SendMail(filePath);
+                var mailResult = await _mailService.SendMail(filePath, templateId);
 
                 if (mailResult.Failed > 0)
-                    return StatusCode(500, mailResult);
+                {
+                    return StatusCode(500, new
+                    {
+                        status = "Failed",
+                        result = mailResult
+                    });
+                }
 
-                return Ok(mailResult);
+                return Ok(new
+                {
+                    status = "Success",
+                    result = mailResult
+                });
             }
             catch (Exception ex)
             {
@@ -53,9 +63,16 @@ namespace MailGenie.Controllers
                     Failed = 0,
                     Errors = new List<string> { ex.Message }
                 };
-                return StatusCode(500, errorResult);
+
+                return StatusCode(500, new
+                {
+                    status = "Error",
+                    result = errorResult
+                });
             }
         }
+
+
 
     }
 }

@@ -9,6 +9,6 @@ namespace MailGenie.Domain.Model.Mail
 {
     public interface IMailService
     {
-        Task<MailResult> SendMail(string excelFilePath);
+        Task<MailResult> SendMail(string excelFilePath,int templateId);
     }
 }
